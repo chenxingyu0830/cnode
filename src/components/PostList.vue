@@ -5,7 +5,7 @@
       <img src="../assets/loading.gif">
     </div>
     <!-- 表示主题帖子列表 -->
-    <div class="posts">
+    <div class="posts" v-else>
       <ul>
         <li>
           <div class="toobar">
@@ -25,9 +25,18 @@
             <span class="reply_count">{{post.reply_count}}</span>
             /{{post.visit_count}}
           </span>
-          <span>
-            {{post.title}}
-          </span>
+          <!-- 标题 -->
+          <router-link :to="{
+            name: 'post_content',
+            params:{
+              id:post.id
+            }
+          }">
+            <span>
+              {{post.title}}
+            </span>
+          </router-link>
+
           <!-- 最终回复时间 -->
           <span class="last_reply">
             {{post.last_reply_at | formatDate}}
@@ -92,13 +101,13 @@ export default {
   ul {
     list-style: none;
     width: 100%;
-    max-width: 1344px;
+    max-width: 1400px;
     margin: 0 auto;
   }
 
   ul li:not(:first-child) {
     padding: 9px;
-    font-size: 15px;
+    font-size: 16px;
     font-family: "Helvetica Neue", "Luxi Sans", "DejaVu Sans", Tahoma, "Hiragino Sans GB", STHeiti, sans-serif !important;
     font-weight: 400;
     background-color: white;
@@ -161,7 +170,7 @@ export default {
   }
 
   .toobar {
-    padding: 10px;
+    padding: 10.5px;
     background-color: #f6f6f6;
     border-radius: 3px 3px 0 0;
   }

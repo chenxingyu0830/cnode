@@ -32,7 +32,7 @@ export default {
 }
 .header .container img{
   max-width: 120px;
-  margin: 10.5px 10px 10.5px 50px;
+  margin: 10px auto;
 }
 .header .container ul{
   list-style: none;
