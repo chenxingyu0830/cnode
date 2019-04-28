@@ -200,8 +200,8 @@ export default {
         }
         .comment_ups{
           position: absolute;
-          top: 15px;
-          left: 1350px;
+          top: 10px;
+          left: 1020px;
         }
       }
     }

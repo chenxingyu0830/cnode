@@ -4,6 +4,7 @@ import Article from '../components/Article'
 import PostList from '../components/PostList'
 import UserInfo from '../components/UserInfo'
 import SlideBar from '../components/SlideBar'
+import IndexSlideBar from '../components/IndexSlideBar'
 
 Vue.use(Router)
 
@@ -13,7 +14,8 @@ export default new Router({
       name:'root',
       path:'/',
       components:{
-        main:PostList
+        main:PostList,
+        SlideBar:IndexSlideBar
       }
     },
     {

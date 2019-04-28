@@ -39,38 +39,64 @@
             <span class="last_reply">
               {{list.last_reply_at | formatDate}}
             </span>
-
           </li>
         </ul>
+        <!-- 分页 -->
+        <pagination @current-change="onCurrentChange"></pagination>
       </div>
     </div>
   </div>
 </template>
 <script>
+import pagination from './Pagination'
 export default {
   name:'PostList',
   data(){
     return {
       isLoading: false,
-      posts: {} //代表页面的列表数组
+      posts: {}, //代表页面的列表数组
+      page: 1
     }
   },
+  components: {
+    pagination
+  },
   methods:{
+    // getData(){
+    // this.$http.get('https://cnodejs.org/api/v1/topics',{
+    //   params:{
+    //     page: this.postpage,
+    //     limit: 20
+    //   }
+
+    // })
+    // .then(res=>{
+    //   this.isLoading = false; //加载成功，去除动画
+    //   this.posts = res.data.data;
+    //   console.log(res)
+    // })
+    // .catch(err=>{
+    //   //处理返回失败后的问题
+    //   console.log('网络波动,请稍后再试！')
+    //   console.log(err)        
+    //   })
+    // },
     getData(){
-    this.$http.get('https://cnodejs.org/api/v1/topics',{
-      page:1,
-      limit:20
-    })
-    .then(res=>{
-      this.isLoading = false; //加载成功，去除动画
-      this.posts = res.data.data;
-      console.log(res)
-    })
-    .catch(err=>{
-      //处理返回失败后的问题
-      console.log('网络波动,请稍后再试！')
-      console.log(err)        
+      this.request('https://cnodejs.org/api/v1/topics','GET',{page:this.page, limit:20}).then(
+        res=>{
+          this.isLoading = false  //加载成功，去除动画
+          this.posts = res
+          this.$router.push({
+            path: "/",
+            query: {
+              page: this.page
+            }
+          })
       })
+    },
+    onCurrentChange(value){
+      this.page = value
+      this.getData()
     }
   },
   beforeMount(){
