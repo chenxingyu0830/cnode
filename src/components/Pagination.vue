@@ -86,10 +86,7 @@ export default {
         border-top: none;
         width: 45px;
         padding: 5px;
-<<<<<<< HEAD
         border: 1px solid #ddd;
-=======
->>>>>>> d44f3308808324c1d256fe9412ed25152052f0fe
       }
       &:hover{
         background-color: #F5F5F5; 
