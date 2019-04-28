@@ -6,6 +6,9 @@
         <div class="el-main">
           <router-view name="main"></router-view>
         </div> 
+        <div class="el-aside">
+          <router-view name="SlideBar"></router-view>
+        </div>
       </div>
 
     </div>
@@ -14,12 +17,11 @@
 
 <script>
 import Header from './components/Header'
-import PostList from './components/PostList'
 export default {
   name: 'App',
   components:{
     Header,
-    PostList
+
   }
 }
 </script>
@@ -44,43 +46,30 @@ body {
   font-family: "Helvetica Neue", "Luxi Sans", "DejaVu Sans", Tahoma,
     "Hiragino Sans GB", STHeiti, sans-serif;
 }
-// a {
-//   color: inherit;
-//   text-decoration: none;
-// }
-// .icon {
-//   width: 1em;
-//   height: 1em;
-//   vertical-align: -0.15em;
-//   fill: currentColor;
-//   overflow: hidden;
-// }
+a {
+  color: inherit;
+  text-decoration: none;
+}
+.icon {
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+}
 .el-container{
+  display: flex;
   margin: 15px auto;
   max-width: 1400px;
   min-width: 960px;
+  .el-main{
+    flex: 1;
+    padding-right: 15px;
+    max-width: 1095px;
+  }
+  .el-aside{
+    width: 290px;
+  }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// .el-container {
-//   padding: 15px 5%;
-//   .el-main {
-//     padding: 0;
-//     padding-right: 15px;
-//   }
-// }
 @import "./assets/markdown.css";
 </style>

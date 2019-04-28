@@ -28,16 +28,18 @@
         </div>
 
         <div class="comment" v-for="(reply,index) in post.replies" :key="index">
-          <!-- <router-link :to="user_info"> -->
           <div class="avatar">
-            <img :src="reply.author.avatar_url" alt="">
+            <router-link :to="{name:'user_info',params:{loginname: reply.author.loginname}}">
+              <img :src="reply.author.avatar_url">
+            </router-link>
           </div>
+
           <div class="comment-container">
           <div class="comment_info">
-            <!-- </router-link> -->
-            <!-- <router-link :to="user_info"> -->
-            <span>{{reply.author.loginname}}</span>
-            <!-- </router-link> -->
+            <router-link :to="{
+              name:'user_info',params:{loginname: reply.author.loginname}
+            }">{{reply.author.loginname}}
+            </router-link>
             <span>{{index}}楼·{{reply.create_at | formatDate}}</span>
           </div>
 
@@ -67,32 +69,34 @@ export default {
   data(){
     return {
      isLoading: false,
-     post:{}, //代表当前文章的所有内容
+     post: {}, //代表当前文章的所有内容
     }
   },
   methods:{
-    getArticleData(){
-     this.$http
-      .get(`https://cnodejs.org/api/v1/topic/${this.$route.params.id}`)
-      .then(res=>{
-          if(res.data.success == true){
-            this.isLoading = false;
-            this.post = res.data.data;
-          }
-        })
-        .catch(err=>{
-          console.log(err)
-        })
-     }
+    getArticleData(params){
+      this.request(`/topic/${params}`,'GET')
+      .then(response=>{
+        this.post = response;
+        this.isLoading = false;
+      })
+      .catch(err=>{
+        console.log(err)
+      });
+    }
   },
   beforeMount () {
     this.isLoading = true
-    this.getArticleData()
-  }
+    this.getArticleData(this.$route.params.id)
+  },
+  watch: {
+    '$route'(to, from) {
+      this.getArticleData(this.$route.params.id)
+    }
+  }  
 }
 </script>
 
-<style <style lang="scss" scoped>
+<style lang="scss" scoped>
 
 .article{
   .loading {
@@ -160,6 +164,7 @@ export default {
       }
     }
     .comments{
+      
       .header{
         padding: 10px;
         background-color: #f6f6f6;
@@ -182,11 +187,10 @@ export default {
             border-radius: 3px;
           }
         }
-        .comment_info{
+        .comment_info{  
           color: #666;
           text-decoration: none;
           padding-left: 10px;
-
         }
         .comment_ups{
           position: absolute;

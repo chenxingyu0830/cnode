@@ -3,10 +3,13 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import request from "./helper/request";
 import Axios from 'axios'
 
 Vue.prototype.$http = Axios
 Vue.config.productionTip = false
+
+Vue.prototype.request = request
 
 /* eslint-disable no-new */
 new Vue({
