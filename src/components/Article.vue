@@ -198,6 +198,9 @@ export default {
           text-decoration: none;
           padding-left: 10px;
         }
+        .comment_content{
+          max-width: 1000px;
+        }
         .comment_ups{
           position: absolute;
           top: 10px;
