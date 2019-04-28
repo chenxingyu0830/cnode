@@ -103,11 +103,12 @@ export default {
       });
     }
   },
-  watch:{
-    $route(to, from){
-      //对路由变化进行检测
-      this.getData()
-    }
+
+  beforeRouteUpdate (to, from, next) {
+    // react to route changes...
+    // don't forget to call next()
+    this.getData()
+    next()
   },
   beforeMount(){
     this.isLoading = true

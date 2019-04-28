@@ -88,11 +88,17 @@ export default {
     this.isLoading = true
     this.getArticleData(this.$route.params.id)
   },
-  watch: {
-    '$route'(to, from) {
-      this.getArticleData(this.$route.params.id)
-    }
-  }  
+  // watch: {
+  //   '$route'(to, from) {
+  //     this.getArticleData(this.$route.params.id)
+  //   }
+  // }  
+  beforeRouteUpdate (to, from, next) {
+    // react to route changes...
+    // don't forget to call next()
+    this.getArticleData(this.$route.params.id)
+    next()
+  }
 }
 </script>
 
