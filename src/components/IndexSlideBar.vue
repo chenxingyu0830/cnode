@@ -11,7 +11,9 @@
   </div>
 </template>
 <script>
-export default {};
+export default {
+  name: 'IndexSideBar'
+};
 </script>
 <style lang="scss" scoped>
 .lists {
